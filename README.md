@@ -1,21 +1,7 @@
 # guestbook
 
-generated using Luminus version "3.10.35"
-
-FIXME
-
-## Prerequisites
-
-You will need [Leiningen][1] 2.0 or above installed.
-
-[1]: https://github.com/technomancy/leiningen
-
-## Running
-
-To start a web server for the application, run:
-
-    lein run 
+An example from Web Development With Clojure
 
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019
