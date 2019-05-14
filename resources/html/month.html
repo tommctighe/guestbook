@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="span12">
+    <p>Select one or more months:</p>
+    <form method="GET" action="/">
+      {% csrf-field %}
+
+      <ul class="messages">
+        {% for row in months %}
+        <li>
+          <input type="checkbox" name="{{row.event_month}}" value="{{row.event_month}}"> {{row.event_month}}<br>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if errors.name %}
+      <div class="alert alert-danger">{{errors.name|join}}</div>
+      {% endif %}
+
+      <input type="submit" class="btn btn-primary" value="go" />
+    </form>
+  </div>
+</div>
+{% endblock %}

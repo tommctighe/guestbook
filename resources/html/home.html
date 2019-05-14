@@ -1,8 +1,75 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-  <div class="col-sm-12">
-    {{docs|markdown}}
+  <div class="span12">
+    <form method="POST" action="/">
+      {% csrf-field %}
+        <fieldset>
+        <p>Regions:</p>
+      <ul class="messages">
+        {% for row in regions %}
+        <li>
+          <input type="checkbox" {{params}} name="region{{forloop.counter}}" value="{{row.event_region}}"> {{row.event_region}}<br>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if errors.name %}
+      <div class="alert alert-danger">{{errors.name|join}}</div>
+      {% endif %}
+        </fieldset>
+        <fieldset>
+            <p>Months:</p>
+            <ul class="messages">
+                {% for row in months %}
+                <li>
+                    <input type="checkbox" name="month{{forloop.counter}}" value="{{row.event_month}}"> {{row.event_month}}<br>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if errors.name %}
+            <div class="alert alert-danger">{{errors.name|join}}</div>
+            {% endif %}
+        </fieldset>
+        <fieldset>
+            <p>Books:</p>
+            <ul class="messages">
+                {% for row in books %}
+                <li>
+                    <input type="checkbox" name="book{{forloop.counter}}" value="{{row.event_book}}"> {{row.event_book}}<br>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if errors.name %}
+            <div class="alert alert-danger">{{errors.name|join}}</div>
+            {% endif %}
+        </fieldset>
+      <input type="submit" class="btn btn-primary" value="go" />
+    </form>
   </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p>Here are the events:</p>
+        <ul class="messages">
+            {% for row in events %}
+            <li>
+                {{row.event_title}}<br />
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <p>Here are the params:</p>
+        <ul class="messages">
+            {% for p in params %}
+            <li>
+                {{p}}<br />
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
