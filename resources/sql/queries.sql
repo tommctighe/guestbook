@@ -1,4 +1,3 @@
-
 -- :name get-events :? :*
 -- :doc selects all events given user-selected filters, I imagine this is really slow for big lists
 SELECT * FROM events WHERE id=id
@@ -14,8 +13,8 @@ SELECT * FROM events WHERE id=id
         :when (not-empty items)]
     (str " AND event_" opt " IN (" (clojure.string/join "," items) ")")))
 
-;;(def my-params {:region1 "al" :region2 "uk" :book1 "denson"})
-(clojure.string/join (create-sql-clause ["book" "region" "month"] params))
+(let [options ["book" "region" "month"]]
+(clojure.string/join (create-sql-clause options params))) --params is passed in from guestbook.routes.home
 
 ~*/
 

@@ -9,7 +9,9 @@
       <ul class="messages">
         {% for row in regions %}
         <li>
-          <input type="checkbox" {{params}} name="region{{forloop.counter}}" value="{{row.event_region}}"> {{row.event_region}}<br>
+          <input type="checkbox" {{row.checked}}
+                 name="region{{forloop.counter}}"
+                 value="{{row.event_region}}"> {{row.event_region}}<br>
         </li>
         {% endfor %}
       </ul>
@@ -22,7 +24,9 @@
             <ul class="messages">
                 {% for row in months %}
                 <li>
-                    <input type="checkbox" name="month{{forloop.counter}}" value="{{row.event_month}}"> {{row.event_month}}<br>
+                    <input type="checkbox" {{row.checked}}
+                           name="month{{forloop.counter}}"
+                           value="{{row.event_month}}"> {{row.event_month}}<br>
                 </li>
                 {% endfor %}
             </ul>
@@ -35,7 +39,9 @@
             <ul class="messages">
                 {% for row in books %}
                 <li>
-                    <input type="checkbox" name="book{{forloop.counter}}" value="{{row.event_book}}"> {{row.event_book}}<br>
+                    <input type="checkbox" {{row.checked}}
+                           name="book{{forloop.counter}}"
+                           value="{{row.event_book}}"> {{row.event_book}}<br>
                 </li>
                 {% endfor %}
             </ul>
@@ -62,11 +68,11 @@
 </div>
 <div class="row">
     <div class="span12">
-        <p>Here are the params:</p>
+        <p>Here are the regions:</p>
         <ul class="messages">
-            {% for p in params %}
+            {% for r in regions %}
             <li>
-                {{p}}<br />
+                {{r}}<br />
             </li>
             {% endfor %}
         </ul>

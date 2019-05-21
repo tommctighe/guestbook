@@ -7,6 +7,13 @@
             [clojure.java.io :as io]
             [struct.core :as st]))
 
+(defn add-checked [options chosen]
+  (for [opt options
+        pair (seq opt)] ;;just want the val of each map!
+    (if (some #{(second pair)} chosen)
+      (assoc opt :checked "checked")
+      (assoc opt :checked ""))))
+
 (defn home-page [{:keys [flash]}]
   (layout/render
    "home.html"
@@ -15,12 +22,13 @@
     :books (db/get-books)}))
 
 (defn show-events [{:keys [params]}]
-  (layout/render
+  (let [chosen (vals params)]
+    (layout/render
     "home.html"
-    {:regions (db/get-regions params)
-     :months (db/get-months)
-     :books (db/get-books)
-     :events (db/get-events params)}))
+    {:regions (add-checked (db/get-regions) chosen)
+     :months (add-checked (db/get-months) chosen)
+     :books (add-checked (db/get-books) chosen)
+     :events (db/get-events params)})))
 
 (defn about-page []
   (layout/render "about.html"))
