@@ -18,17 +18,17 @@
   (layout/render
    "home.html"
    {:regions (db/get-regions)
-    :months (db/get-months)
     :books (db/get-books)}))
 
 (defn show-events [{:keys [params]}]
   (let [chosen (vals params)]
     (layout/render
     "home.html"
-    {:regions (add-checked (db/get-regions) chosen)
-     :months (add-checked (db/get-months) chosen)
-     :books (add-checked (db/get-books) chosen)
-     :events (db/get-events params)})))
+    {:params params
+     :regions (add-checked (db/get-regions) (:region params))
+     :books (add-checked (db/get-books) (:book params))
+     :events (db/get-events)
+     })))
 
 (defn about-page []
   (layout/render "about.html"))
@@ -37,5 +37,3 @@
   (GET "/" request (home-page request))
   (POST "/" request (show-events request))
   (GET "/about" [] (about-page)))
-
-

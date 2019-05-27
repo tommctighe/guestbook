@@ -1,31 +1,12 @@
 -- :name get-events :? :*
 -- :doc selects all events given user-selected filters, I imagine this is really slow for big lists
-SELECT * FROM events WHERE id=id
-/*~
-
-(defn get-matching-keys [substring the-map]
-  (let [ss (re-pattern substring)]
-    (map #(str "'" (the-map %) "'") (filter #(re-find ss (name %)) (keys the-map)))))
-
-(defn create-sql-clause [options user-choices]
-  (for [opt options
-        :let [items (get-matching-keys opt user-choices)]
-        :when (not-empty items)]
-    (str " AND event_" opt " IN (" (clojure.string/join "," items) ")")))
-
-(let [options ["book" "region" "month"]]
-(clojure.string/join (create-sql-clause options params))) --params is passed in from guestbook.routes.home
-
-~*/
+SELECT * FROM events WHERE events.id=events.id
+   --~ (if (seq (:region params)) " AND event_region IN ('Europe', 'UK')")
 
 -- :name get-regions :? :*
--- :doc selects distinct regions
+-- :doc selects regions
 SELECT DISTINCT event_region FROM events
-
--- :name get-months :? :*
--- :doc selects distinct months
-SELECT DISTINCT event_month FROM events
 
 -- :name get-books :? :*
 -- :doc selects distinct books
-SELECT DISTINCT event_book FROM events
+SELECT book_name FROM books
