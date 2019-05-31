@@ -9,8 +9,8 @@
 
 (defn add-checked [options chosen]
   (for [opt options
-        pair (seq opt)] ;;just want the val of each map!
-    (if (some #{(second pair)} chosen)
+        k-v (seq opt)] ;;just want the val of each map!
+    (if (some #{(second k-v)} chosen)
       (assoc opt :checked "checked")
       (assoc opt :checked ""))))
 
@@ -27,7 +27,8 @@
     {:params params
      :regions (add-checked (db/get-regions) (:region params))
      :books (add-checked (db/get-books) (:book params))
-     :events (db/get-events)
+     :months (reduce #(assoc %1 %2 "checked") {} (:month params))
+     :events (db/get-events params)
      })))
 
 (defn about-page []

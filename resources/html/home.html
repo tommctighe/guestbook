@@ -20,62 +20,62 @@
             <p>Months:</p>
             <ul class="messages">
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.january }}
                            name="month"
                            value="january"> january<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.february }}
                            name="month"
                            value="february"> february<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.march }}
                            name="month"
                            value="march"> march<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.april }}
                            name="month"
                            value="april"> april<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.may }}
                            name="month"
                            value="may"> may<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.june }}
                            name="month"
                            value="june"> june<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.july }}
                            name="month"
                            value="july"> july<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.august }}
                            name="month"
                            value="august"> august<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.september }}
                            name="month"
                            value="september"> september<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.october }}
                            name="month"
                            value="october"> october<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.november }}
                            name="month"
                            value="november"> november<br>
                 </li>
                 <li>
-                    <input type="checkbox" {{row.checked}}
+                    <input type="checkbox" {{ months.december }}
                            name="month"
                            value="december"> december<br>
                 </li>
@@ -112,9 +112,9 @@
 
     <div class="row">
         <div class="span12">
-            <p>Here are the params:</p>
+            <p>Here are the months:</p>
             <ul class="messages">
-                {% for p in params %}
+                {% for p in months %}
                 <li>
                     {{p}}<br />
                 </li>
