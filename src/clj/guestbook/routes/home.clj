@@ -7,6 +7,12 @@
             [clojure.java.io :as io]
             [struct.core :as st]))
 
+(defn get-distinct [events]
+  (let [distinct-vals []]
+    (for [e events
+       k-v (seq e)]
+  (conj distinct-vals (second k-v)))))
+
 (defn add-checked [options chosen]
   (for [opt options
         k-v (seq opt)] ;;just want the val of each map!
@@ -18,7 +24,8 @@
   (layout/render
    "home.html"
    {:regions (db/get-regions)
-    :books (db/get-books)}))
+    :books (db/get-books)
+    :events (db/get-events)}))
 
 (defn show-events [{:keys [params]}]
   (let [chosen (vals params)]

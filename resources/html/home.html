@@ -4,94 +4,68 @@
   <div class="span12">
     <form method="POST" action="/">
       {% csrf-field %}
+      <p><strong>Filter the list:</strong></p>
         <fieldset>
-        <p>Regions:</p>
-      <ul class="messages">
         {% for row in regions %}
-        <li>
-          <input type="checkbox" {{row.checked}}
+          <label class="custom">
+            <input type="checkbox" {{row.checked}}
                  name="region"
-                 value="{{row.event_region}}"> {{row.event_region}}<br>
-        </li>
+                 value="{{row.region}}"> {{row.region}} </label>
+                 <span class="checkmark"></span>
         {% endfor %}
-      </ul>
         </fieldset>
+        <hr />
         <fieldset>
-            <p>Months:</p>
-            <ul class="messages">
-                <li>
+                <label class="checkbox-inline">                    
                     <input type="checkbox" {{ months.january }}
                            name="month"
-                           value="january"> january<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.february }}
+                           value="january"> January</label>
+                <label class="checkbox-inline">                    
+                            <input type="checkbox" {{ months.february }}
                            name="month"
-                           value="february"> february<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.march }}
+                           value="february"> February</label>
+                           <label class="checkbox-inline">    
+                           <input type="checkbox" {{ months.march }}
                            name="month"
-                           value="march"> march<br>
-                </li>
-                <li>
+                           value="march"> March</label>
+                           <label class="checkbox-inline">
                     <input type="checkbox" {{ months.april }}
                            name="month"
-                           value="april"> april<br>
-                </li>
-                <li>
+                           value="april"> April</label>
+                           <label class="checkbox-inline">                           
                     <input type="checkbox" {{ months.may }}
                            name="month"
-                           value="may"> may<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.june }}
+                           value="may"> May</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.june }}
                            name="month"
-                           value="june"> june<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.july }}
+                           value="june"> June</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.july }}
                            name="month"
-                           value="july"> july<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.august }}
+                           value="july"> July</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.august }}
                            name="month"
-                           value="august"> august<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.september }}
+                           value="august"> August</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.september }}
                            name="month"
-                           value="september"> september<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.october }}
+                           value="september"> September</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.october }}
                            name="month"
-                           value="october"> october<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.november }}
+                           value="october"> October</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.november }}
                            name="month"
-                           value="november"> november<br>
-                </li>
-                <li>
-                    <input type="checkbox" {{ months.december }}
+                           value="november"> November</label>
+                           <label class="checkbox-inline">                    <input type="checkbox" {{ months.december }}
                            name="month"
-                           value="december"> december<br>
-                </li>
-            </ul>
+                           value="december"> December</label>
         </fieldset>
+        <hr />
         <fieldset>
-            <p>Books:</p>
-            <ul class="messages">
                 {% for row in books %}
-                <li>
-                    <input type="checkbox" {{row.checked}}
+                <label class="checkbox-inline">
+                <input type="checkbox" {{row.checked}}
                            name="book"
-                           value="{{row.book_name}}"> {{row.book_name}}<br>
-                </li>
+                           value="{{row.book_name}}"> {{row.book_name}}</label>
                 {% endfor %}
-            </ul>
         </fieldset>
       <input type="submit" class="btn btn-primary" value="go" />
     </form>
@@ -99,27 +73,14 @@
 </div>
 
 <div class="row">
-    <div class="span12">
-        <p>Here are the events:</p>
-        <ul class="messages">
+    <div class="span12 events">
+        <p><strong>All-day singings:</strong></p>
+        <ul class="">
             {% for row in events %}
             <li>
-                {{row.event_title}}<br />
+              {{row.month}} {{row.dates}}: {{row.title}}<br />
             </li>
             {% endfor %}
         </ul>
     </div>
-
-    <div class="row">
-        <div class="span12">
-            <p>Here are the months:</p>
-            <ul class="messages">
-                {% for p in months %}
-                <li>
-                    {{p}}<br />
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
         {% endblock %}

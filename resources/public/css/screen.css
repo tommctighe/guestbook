@@ -1,14 +1,74 @@
 html,
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: .95em;
   height: 100%;
   line-height: 1.4em;
 	background: #eaeaea;
-	width: 520px;
+  width: 100%;
 	margin: 0 auto;
 }
+
+hr {
+  margin-top: .8em;
+}
+
+.btn {
+  margin-top: .9em;
+}
+
+.container {
+  background: white;
+  max-width: 1100px;
+}
+
+fieldset {
+  padding: 5px;
+}
+
+label {
+  width: 165px;
+  font-size: .9em;
+  margin: 0;
+}
+
+.events {
+  background: white;
+  padding: 0 30px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+	position: relative;
+	font-size: .9em;
+	padding: 5px;
+	border-bottom: 1px dotted #ccc;
+}
+
+li:last-child {
+	border-bottom: none;
+}
+
+li time {
+	font-size: 12px;
+	padding-bottom: 20px;
+}
+
+form, .error {
+	padding: 30px;
+	position: relative;
+  background: white;
+}
+
 .navbar {
   margin-bottom: 10px;
+  margin-left: 15px;
+  padding: 20px 30px;
+  width: 100%;
 }
 .navbar-brand {
   float: none;
@@ -33,35 +93,4 @@ body {
   .navbar-nav .nav-link + .nav-link {
     margin-left: 1rem;
   }
-}
-
-.messages {
-  background: white;
-  width: 520px;
-}
-ul {
-	list-style: none;
-}
-
-ul.messages li {
-	position: relative;
-	font-size: 16px;
-	padding: 5px;
-	border-bottom: 1px dotted #ccc;
-}
-
-li:last-child {
-	border-bottom: none;
-}
-
-li time {
-	font-size: 12px;
-	padding-bottom: 20px;
-}
-
-form, .error {
-	padding: 30px;
-	margin-bottom: 50px;
-	position: relative;
-  background: white;
 }
