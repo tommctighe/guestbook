@@ -2,9 +2,7 @@
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-
-  :dependencies [[org.clojure/data.csv "0.1.4"]
-                 [cheshire "5.8.1"]
+  :dependencies [[cheshire "5.8.1"]
                  [clojure.java-time "0.3.2"]
                  [com.h2database/h2 "1.4.197"]
                  [compojure "1.6.1"]
@@ -21,6 +19,7 @@
                  [mount "0.1.16"]
                  [nrepl "0.5.3"]
                  [org.clojure/clojure "1.10.0"]
+                 [org.clojure/data.csv "0.1.4"]
                  [org.clojure/tools.cli "0.4.1"]
                  [org.clojure/tools.logging "0.4.1"]
                  [org.webjars.bower/tether "1.4.4"]
