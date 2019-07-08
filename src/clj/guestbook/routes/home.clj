@@ -7,15 +7,9 @@
             [clojure.java.io :as io]
             [struct.core :as st]))
 
-(defn get-distinct [events]
-  (let [distinct-vals []]
-    (for [e events
-       k-v (seq e)]
-  (conj distinct-vals (second k-v)))))
-
 (defn add-checked [options chosen]
   (for [opt options
-        k-v (seq opt)] ;;just want the val of each map!
+        k-v (seq opt)]  ; just want the val of each map!
     (if (some #{(second k-v)} chosen)
       (assoc opt :checked "checked")
       (assoc opt :checked ""))))
@@ -24,19 +18,23 @@
   (layout/render
    "home.html"
    {:regions (db/get-regions)
-    :books (db/get-books)
-    :events (db/get-events)}))
+    :books   (db/get-books)
+    :events  (db/get-events)}))
 
 (defn show-events [{:keys [params]}]
-  (let [chosen (vals params)]
+  (let [chosen (reduce-kv (fn [m k v]
+                            (if (string? v)
+                              (assoc m k [v])
+                              (assoc m k v)))
+                          {}
+                          params)]
     (layout/render
-    "home.html"
-    {:params params
-     :regions (add-checked (db/get-regions) (:region params))
-     :books (add-checked (db/get-books) (:book params))
-     :months (reduce #(assoc %1 %2 "checked") {} (:month params))
-     :events (db/get-events params)
-     })))
+     "home.html"
+     {:params  chosen
+      :regions (add-checked (db/get-regions) (:region chosen))
+      :books   (add-checked (db/get-books) (:book chosen))
+      :months  (reduce #(assoc %1 %2 "checked") {} (:month chosen))
+      :events  (db/get-events chosen)})))
 
 (defn about-page []
   (layout/render "about.html"))
