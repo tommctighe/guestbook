@@ -62,19 +62,28 @@
                 ;(map prn)))))
 
 ; (id,event_id,book_id)
-(comment
-  (with-open [reader (io/reader "./raw-input-data/revised-annual-singings.csv")]
+(defn parse-book-id-list
+  "takes a string representation of a comma-delimited list of integers
+  and returns a vector of those integers as clojure ints
+  Example:
+  (parse-book-id-list \"1,4,6\")
+   => [1 4 6]"
+  [book-id-list]
+  (let [str-id-coll (-> book-id-list
+                        (str/replace #" " "")
+                        (str/split #","))]
+    (mapv #(Integer/parseInt %) str-id-coll)))
 
+
+(comment
+  (with-open [reader (io/reader "./raw-input-data/revised-annual-singings-no-blank-rows.csv")]
     (let [result (->> (csv/read-csv reader)
                       rest
-                      (filter #(not (str/blank? (first %))))
-                      (map #(nth % 14))
-                      (map #(str/replace % #" " ""))
-                      (map #(str/split % #","))
-                      (map (fn [ids]
-                             (mapv #(Integer/parseInt %) ids)))
-                      (map-indexed (fn [i ids]
-                                     [i ids]))
+                      ;; The 0th column of the input CSV is the row id,
+                      ;; the 15th column is a comma-delimited list of book ids
+                      (map (fn [coll] [(nth coll 0)
+                                       (parse-book-id-list (nth coll 15))]))
+                      ;; TODO comment to explain this mapcat stuff
                       (mapcat (fn [[i ids]]
                                 (map (fn [id] [i id]) ids)))
                       (map-indexed #(cons %1 %2))
