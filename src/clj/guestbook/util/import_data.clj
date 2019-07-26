@@ -62,7 +62,7 @@
                 ;(map prn)))))
 
 ; (id,event_id,book_id)
-(defn parse-book-id-list
+(defn parse-comma-delimited-ints
   "takes a string representation of a comma-delimited list of integers
   and returns a vector of those integers as clojure ints
   Example:
@@ -77,28 +77,23 @@
 
 (comment
   (with-open [reader (io/reader "./raw-input-data/revised-annual-singings-no-blank-rows.csv")]
-    (let [result (->> (csv/read-csv reader)
-                      rest
-                      ;; The 0th column of the input CSV is the row id,
-                      ;; the 15th column is a comma-delimited list of book ids
-                      (map (fn [coll] [(nth coll 0)
-                                       (parse-book-id-list (nth coll 15))]))
-                      ;; TODO comment to explain this mapcat stuff
-                      (mapcat (fn [[i ids]]
-                                (map (fn [id] [i id]) ids)))
-                      (map-indexed #(cons %1 %2))
-                      (map (fn [[id event-id book-id]] (format "(%s, %s, %s)"
-                                                               id
-                                                               event-id
-                                                               book-id)))
-                      (str/join ",\n"))]
-      (str result ";"))))
+    (let [rows (->> (csv/read-csv reader)
+                    rest
+                    (map (fn [coll] {:event-id (nth coll 0)
+                                     :book-ids (parse-comma-delimited-ints (nth coll 15))}))
+                    (mapcat (fn [m]
+                              (for [book-id (:book-ids m)]
+                                {:event-id (:event-id m)
+                                 :book-id book-id})))
+                    (map-indexed (fn [i m]
+                                   (assoc m :pivot-id i)))
+                    (map (fn [{:keys [pivot-id event-id book-id]}]
+                           (format "(%s, %s, %s)"
+                                   pivot-id
+                                   event-id
+                                   book-id))))]
+      (str (str/join ",\n" rows) ";"))))
 
-
-                ;rest
-                ;(filter #(= 15 (count %)))
-                ;(map-indexed format-sql-insert-line)))))
-                ;(map prn)))))))
 
 
 
