@@ -15,7 +15,7 @@ VALUES
 (7, 'Social Harp'),
 (8, 'Southern Harmony'),
 (9, 'J.L. White Book'),
-(10, 'DH Mansfield American Vocalist'),
+(10, 'American Vocalist'),
 (11, 'Norumbega Harmony'),
 (12, 'Missouri Harmony');
 
