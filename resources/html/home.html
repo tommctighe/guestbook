@@ -1,7 +1,77 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+<script>
+/** Notice
+The input MUST come before the label, or else the `checked` state will not work!
+*/
+
+/**
+Vue js is not required for this, I am using it to show that the buttons do in fact work as expected.
+*/
+new Vue ({
+  el: 'body',
+  data: {
+    checked: []
+  },
+  computed: {
+    requiredErrorMsg: function () {
+      return 'Required fruit !!'
+    },
+    minlengthErrorMsg: function () {
+      return 'Please chose at least 1 fruit !!'
+    },
+    maxlengthErrorMsg: function () {
+      return 'Please chose at most 2 fruits !!'
+    }
+  }
+})
+</script>
+
 <div class="row">
   <div class="span12">
+    <div class="checkbox-btn-group checkbox-selection-group">
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_1" checked="checked" v-model="checked" id="button_1"
+        v-validate:checkbox="{
+          required: { rule: true, message: requiredErrorMsg },
+          minlength: { rule: 1, message: minlengthErrorMsg },
+          maxlength: { rule: 2, message: maxlengthErrorMsg }
+        }"       
+        >
+        <label for="button_1">Button 1</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_2" v-model="checked" id="button_2"/>
+        <label for="button_2" v-validate:checkbox>Button 2</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_3" v-model="checked" id="button_3"/>
+        <label for="button_3" v-validate:checkbox>Button 3</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_4" v-model="checked" id="button_4"/>
+        <label for="button_4" v-validate:checkbox>Button 4</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_5" v-model="checked" id="button_5"/>
+        <label for="button_5" v-validate:checkbox>Button 5</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="radio" value="button_6" v-model="checked" id="button_6"/>
+        <label for="button_6" v-validate:checkbox>Button 6</label>
+      </div>
+    </div>
+    
+     <ul class="errors">
+      <li v-for="msg in $validation1.checkbox.errors">
+        <p>{{msg.message}}</p>
+      </li>
+    </ul>
+    
+    <h5 class="show m-t-2">Currently checked value: <span>{{ checked }}</span></h5>
+
     <form method="POST" action="/">
       {% csrf-field %}
       <p><strong>Filter the list:</strong></p>
