@@ -3,7 +3,7 @@
             [guestbook.db.core :as db]
             [compojure.core :refer [defroutes GET]]
             [compojure.core :refer [defroutes GET POST]]
-            [ring.util.http-response :as response]
+            [ring.util.response :refer [response]]
             [clojure.java.io :as io]
             [struct.core :as st]))
 
@@ -39,7 +39,22 @@
 (defn about-page []
   (layout/render "about.html"))
 
+(defn show-cart [{:keys [session]}]
+  (layout/render "cart.html"
+                 (select-keys session [:cart])))
+
+(defn add-event-to-cart [{:keys [session params]}]
+  ;(clojure.pprint/pprint request)
+  {:body (str "Event " (:event params) " successfully added to cart")
+   :headers {"Content-Type" "text/plain"}
+   :session  (update session
+                     :cart
+                     #(conj % (:event params)))})
+  ;(update session :cart #(conj (:event path-params) %)))
+
 (defroutes home-routes
   (GET "/" request (home-page request))
   (POST "/" request (show-events request))
-  (GET "/about" [] (about-page)))
+  (GET "/about" [] (about-page))
+  (GET "/cart" request (show-cart request))
+  (POST "/cart/:event" request (add-event-to-cart request)))

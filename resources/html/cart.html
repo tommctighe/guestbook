@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="span12 events">
+        <p><strong>All-day singings:</strong></p>
+        <ul class="">
+            {% for event in cart %}
+            <li>
+              {{event}}<br />
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

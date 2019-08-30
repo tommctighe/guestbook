@@ -78,7 +78,11 @@
         <ul class="">
             {% for row in events %}
             <li>
-              {{row.month}} {{row.dates}}: {{row.name}}<br />
+                {{row.month}} {{row.dates}}: {{row.name}}
+                <form action="/cart/{{row.id}}" method="post">
+                    {% csrf-field %}
+                    <input type="submit" value="Add to cart"/>
+                </form><br />
             </li>
             {% endfor %}
         </ul>
